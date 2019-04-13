@@ -6,6 +6,7 @@ import UdaciSteppers from './UdaciSteppers'
 import DateHeader from './DateHeader'
 import { Ionicons } from '@expo/vector-icons'
 import TextButton from './TextButton'
+import { submitEntry, removeEntry } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -61,18 +62,18 @@ export default class AddEntry extends Component {
 
     // Navigate to home
 
-    // Save to "DB"
+    submitEntry({ key, entry })
 
     // Clear local notification
   }
   reset = () => {
     const key = timeToString()
 
-    // Update redux
+    // Update Redux
 
     // Route to Home
 
-    // Update "DB"
+    removeEntry(key)
   }
   render() {
     const metaInfo = getMetricMetaInfo()
@@ -81,10 +82,10 @@ export default class AddEntry extends Component {
       return (
         <View>
           <Ionicons
-            name='ios-happy-outline'
+            name={'ios-happy-outline'}
             size={100}
           />
-          <Text>You already logged your information for today</Text>
+          <Text>You already logged your information for today.</Text>
           <TextButton onPress={this.reset}>
             Reset
           </TextButton>
